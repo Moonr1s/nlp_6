@@ -7,11 +7,8 @@ from sklearn.metrics import classification_report, accuracy_score
 from scipy.sparse import hstack
 
 def load_data(file_path):
-    """
-    解析数据文件。
-    格式: ID * Entity1 * Entity2 * Rest
-    Rest 部分: Type1 Type2 SubType1 SubType2 Head1 Head2 Sentence... Relation
-    """
+
+
     sentences = []
     features = []  # 存放类型等结构化特征
     labels = []
@@ -160,12 +157,8 @@ def run_experiment(train_files, eval_files):
 
 # --- 主程序入口 ---
 if __name__ == "__main__":
-    base_dir = "data" # 假设数据在 data 文件夹下 (根据您的文件路径结构，可能需要调整)
-    # 如果您的代码与data目录同级，这通常是正确的。
-    # 根据您提供的文件名，这些文件似乎在一个很深的目录里，请确保 base_dir 指向包含 .txt 文件的目录
-    # 或者直接使用绝对路径/相对路径列表。
-    
-    # 定义文件列表
+    base_dir = "data"
+
     # 我们将 All 和 Positive 的训练集都用于训练（Positive 作为过采样增强）
     train_files = [
         os.path.join(base_dir, "All_8_features_train.txt"),
@@ -180,7 +173,6 @@ if __name__ == "__main__":
         "Test (Positive)": os.path.join(base_dir, "Positive_8_features_test.txt")
     }
     
-    # 检查至少主训练文件存在
     if os.path.exists(train_files[0]):
         run_experiment(train_files, eval_files)
     else:
